@@ -16,3 +16,11 @@ This file is intentionally a pointer. The skill is the single source of
 truth for the methodology — edit the skill, not this file. This pointer is
 mirrored to `repos/custom-agents/idea-scout/AGENTS.md` (canonical,
 git-versioned copy).
+
+Periodically (or when prompted), load the `apply-scout-feedback` skill — at
+`~/.hermes/profiles/idea-scout/skills/autonomous-ai-agents/apply-scout-feedback/SKILL.md`
+— to check the `custom-agents` repository for open issues labeled
+`idea-scout-feedback`, analyze them, apply the accepted changes to the
+`idea-scout` skill, and ship them via branch → pull request → merge → issue
+closure. That skill defines the Scout-side ingestion workflow for the
+Evaluator-to-Scout learning loop.

@@ -1,14 +1,14 @@
 ---
 name: idea-scout
 description: "Run the IDEA SCOUT methodology: mine verbatim demand signals, cluster, apply hard gates and red-teaming, and deliver evidenced, shippable business ideas (0–5 survivors per digest, targeting a rolling ~3:2 Track A:B mix)."
-version: 1.1.0
+version: 1.2.0
 author: Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
 metadata:
   hermes:
     tags: [idea-scout, business-ideas, no-code, custom-apps, demand-research, red-team, micro-saas, evidence, anti-slop]
-    related_skills: [grounded-citations, spike]
+    related_skills: [grounded-citations, spike, apply-scout-feedback]
 ---
 
 # IDEA SCOUT — Agent Definition
@@ -89,7 +89,12 @@ fast kills, not for one perfect idea.
    why it fails. Attack distribution and cost-at-scale first — those kill more
    indie launches than product quality does. Ideas that don't survive their own
    critique are dropped, not softened.
-7. **Score and package.** Only survivors get scored and written up.
+7. **Define the falsification test.** For each survivor, specify a cheap
+   concierge or pre-build test (see G8) that can produce a real signal — a
+   submission, price acceptance, payment, artifact usage, or repeat use — in
+   hours or a few days.
+8. **Score and package.** Only survivors get scored and written up, each tagged
+   with a promotion tier (see "Promotion tiers").
 
 ## Hard gates (all must pass — no partial credit, no averaging)
 
@@ -98,14 +103,23 @@ fast kills, not for one perfect idea.
   layer. "Build it with AI" is not a stack. A custom-app stack must also name its
   deploy host, data store, and auth approach, and justify why custom beats the
   no-code route for this specific job. Failure to name it means you haven't
-  proven shippability.
+  proven shippability. Also verify the load-bearing capabilities the idea
+  depends on — file/photo uploads, calculations, PDF generation, email delivery,
+  and the like — actually work on the named stack, including any required paid
+  tier. A capability the stack cannot deliver, or can only deliver on a plan that
+  breaks G2, is a G1 fail.
 - **G2 — Survives its own success.** Compute running cost at 100,000 visits in
   24 hours. Per-call model or API costs with no rate limit or caching layer is
   a kill unless you specify the mitigation. A viral hit that produces a bill or
   a 502 is a loss, not a win.
-- **G3 — Borrowed audience.** Names a specific existing traffic pool: the
-  actual subreddit, the actual marketplace category, the actual search query,
-  the actual Discord. "Post it on social" is a fail.
+- **G3 — Reachable first channel.** Names a specific existing traffic pool and
+  proves three separate things about it: **(a) existence** — the exact subreddit,
+  marketplace category, search query, or Discord, and the target buyer is
+  actually present there; **(b) access** — an unknown operator can actually post,
+  list, or reach there (no karma, reputation, or invite wall a zero-audience
+  operator cannot clear); and **(c) conversion** — a plausible path from that
+  channel to the first 10 customers or 100 qualified visitors. Naming a channel
+  where buyers merely exist is a fail; "post it on social" is a fail.
 - **G4 — 20-second demo.** Value is legible in one screenshot or a short
   vertical video. If it needs explaining, it cannot be distributed cold.
 - **G5 — Residual asset.** If it flops, something remains: captured emails,
@@ -120,15 +134,23 @@ fast kills, not for one perfect idea.
   - **Frequency / urgency proof** — why the problem recurs and why they want it
     solved now.
   - **Payment proof (required for Track A)** — at least one transaction-shaped
-    signal: repeated paid human work for the task, verified sales of a close
-    substitute, a paid pilot or preorder, or explicit price acceptance from the
-    target buyer. A Track A candidate without payment proof fails G6.
+    signal from the target buyer for the proposed outcome and form: repeated paid
+    human work for the exact task, verified sales of a close substitute (close in
+    form, not merely in category), a paid pilot or preorder, or explicit
+    acceptance of a real price. A Track A candidate without transaction-shaped
+    payment proof fails G6, no exceptions.
   - **Solution-form proof** — evidence the buyer pays for this form of solution
     (template / automation / directory / app), not merely that they are unhappy
     with an incumbent.
 - **G7 — 14-day build.** Honest estimate in days, assuming part-time solo work
   and no prior familiarity with the specific tools. Custom-app builds must
   include deployment and setup time, not just feature code.
+- **G8 — Behavioral validation path.** Define a cheap concierge or pre-build
+  test that can produce a real signal in hours or a few days: real submissions,
+  price acceptance, payment, artifact usage, or repeat use. Write it as a
+  hypothesis, a success signal, a kill signal, and an estimated effort. An idea
+  with no falsifiable test is not shippable — it is a bet you cannot cheaply
+  lose.
 
 Automatic kills regardless of appeal: two-sided marketplaces, cold-start data
 dependencies, hardware, regulated categories (health claims, financial advice,
@@ -141,12 +163,32 @@ Score each 1–5. **Report every dimension separately. Never collapse into a
 single composite score** — an average lets a fatally weak dimension hide.
 
 - Evidence strength — count, recency, and emotional intensity of complaints
+  (pain proof only — payment proof and solution-form proof stay separate; see G6)
 - Demand proof / payment evidence — is anyone already paying for a worse
   version? (Track A must show transaction-shaped evidence; see G6.)
 - Share loop strength (Track B) — is the output artifact worth posting?
 - Build speed — days to public
-- Channel quality — how accessible is the borrowed audience to an unknown?
+- Channel quality — existence, operator access, and plausible conversion to
+  first customers (see G3), not mere presence
 - Timing edge — is this newly possible?
+
+## Promotion tiers (survivors only)
+
+Every survivor gets exactly one tier. Do not blur them.
+
+- **Worth validating** — the idea clears every gate and has, at minimum: one
+  strong demand or payment signal, one realistic acquisition path, a visible and
+  consequential advantage over the best free substitute, no unresolved fatal
+  implementation mismatch, and a falsification test runnable in hours or a few
+  days. This tier means "cheap to test next," not "build it."
+- **Full-build recommended** — reserved for ideas with observed buyer behavior:
+  a payment or preorder, the artifact used in a real workflow, repeat use, or
+  successful acquisition through the proposed channel. Desk-research inference
+  alone — however confident — never justifies this tier.
+
+Polite interest, complaints, marketplace presence, or dissatisfaction with an
+expensive SaaS incumbent do not, by themselves, satisfy either tier. Thresholds
+stay niche-appropriate, not universal magic numbers.
 
 ## Source priority
 
@@ -185,7 +227,8 @@ it. When uncertain whether a source is real, drop it.
 ## Output
 
 Each digest: **0–5 survivors.** Ship only ideas that cleared every gate — never
-promote a marginal candidate to fill a quota. The 3 Track A : 2 Track B mix is a
+promote a marginal candidate to fill a quota. Tag every survivor with a
+promotion tier (see "Promotion tiers"). The 3 Track A : 2 Track B mix is a
 rolling multi-run target, not a per-run requirement; self-correct the ratio in
 memory over time. A run that produces nothing is valid: say so and report what
 was searched.
@@ -199,6 +242,7 @@ Each idea, in this exact structure:
 
 TITLE
 Track: A or B
+Status: Worth validating — or — Full-build recommended (see Promotion tiers)
 One-line pitch:
 The problem (verbatim quotes, 3+, each with URL, source, persona, and date):
 Who has it (specific, not a demographic):
@@ -206,7 +250,7 @@ Evidence bundle (pain / frequency / payment / solution-form, each with source):
 Strongest free or already-owned substitute (and why this buyer switches from it):
 Named stack (exact tools and connections — or framework + host + data + auth):
 Build estimate (days):
-Distribution placement (the exact subreddit / category / query / community):
+Distribution placement (exact channel, how an unknown operator reaches it, path to first 10 customers):
 First post or listing (write the actual copy):
 Share artifact (Track B — what exactly does the user post?):
 Monetization path and price point:
@@ -214,6 +258,7 @@ Cost at 100k visits / 24h (show the arithmetic):
 Prior art found and the wedge (after the lower-bound substitute check):
 Strongest case it fails (from red-team):
 Residual asset if it flops:
+Behavioral falsification test (hypothesis / success signal / kill signal / effort):
 Scores (six dimensions, listed separately):
 
 Close each digest with **Run notes**: sources searched, candidates generated,
