@@ -17,3 +17,8 @@ This file is intentionally a pointer. The skill is the single source of
 truth for the methodology — edit the skill, not this file. This pointer is
 mirrored to `repos/custom-agents/idea-evaluator/AGENTS.md` (canonical,
 git-versioned copy).
+
+After an evaluation, load the `idea-scout-feedback` skill when calibration
+findings reveal a reusable improvement to the Scout or when the user asks to
+preserve feedback. That skill defines the GitHub issue, deduplication, labeling,
+and verification workflow for the Evaluator-to-Scout learning loop.

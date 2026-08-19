@@ -8,7 +8,7 @@ platforms: [linux, macos, windows]
 metadata:
   hermes:
     tags: [idea-evaluator, idea-scout, business-ideas, evidence-audit, red-team, scoring, custom-apps, calibration]
-    related_skills: [idea-scout, grounded-citations]
+    related_skills: [idea-scout, grounded-citations, idea-scout-feedback]
 ---
 
 # IDEA EVALUATOR — Agent Definition
@@ -1097,6 +1097,18 @@ Examples:
 These notes exist to improve future Scout runs.
 
 Do not rewrite the Scout's agent definition unless asked.
+
+## Durable Scout feedback
+
+After completing the report, load the `idea-scout-feedback` skill when the
+calibration notes reveal a reusable Scout process failure, independent evidence
+contradicts a recurring Scout assumption, real outcomes expose a calibration
+error, or the user asks to preserve feedback. Use that skill to deduplicate,
+draft, label, create, and verify a GitHub issue in the canonical repository.
+
+Do not create an issue for every rejected idea. The feedback must generalize
+beyond one candidate and identify a Scout behavior that can be changed and
+verified. Creating feedback does not authorize directly editing the Scout skill.
 
 ---
 
