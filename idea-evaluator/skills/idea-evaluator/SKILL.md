@@ -192,9 +192,11 @@ kill ledger. Spot-check the most consequential kill reasons and report whether
 the empty result reflects disciplined filtering or inadequate research. Do not
 produce per-idea scores when no idea survived.
 
-A candidate with a load-bearing unknown has not cleared the gates. Treat it as a
-validation lead, not a survivor, until the missing evidence or technical behavior
-is verified.
+A submitted candidate with a load-bearing unknown has not cleared the gates.
+Still audit, score, and rerank it so the operator can see why it failed, but mark
+the relevant gate FAIL, lower confidence, and give it a KILL verdict. It may be
+retained separately as a validation lead until the missing evidence or technical
+behavior is verified; do not silently remove it from the submitted batch.
 
 ---
 
@@ -233,6 +235,10 @@ third-party services, deployment target, and failure handling. Verify critical
 capabilities against first-party documentation or a bounded technical spike;
 framework familiarity and generated code are not evidence that a difficult
 integration works.
+
+Audit the Scout's required explanation for why custom code beats the credible
+no-code or hybrid route for this job. Verify the claimed capability, cost, or
+wedge advantage rather than accepting “custom is more flexible” as sufficient.
 
 Look for hidden:
 
@@ -307,6 +313,9 @@ Assume the operator has no prior familiarity with niche-specific tooling.
 For custom applications, include architecture, implementation, integration,
 tests, responsive and cross-browser QA, security and abuse controls, deployment,
 monitoring, documentation, and launch materials—not only feature coding.
+Apply these checks proportionately to the actual risk surface. A static or
+client-only tool may mark server, auth, database, monitoring, or recovery work
+N/A when the architecture genuinely omits it and the report explains why.
 
 ---
 
