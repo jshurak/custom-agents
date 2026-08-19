@@ -1,13 +1,13 @@
 ---
 name: idea-evaluator
-description: "Run the IDEA EVALUATOR methodology: independently audit Idea Scout digests — re-run the gates, audit evidence, apply score caps, compute the Success Likelihood Index, and produce a reranked idea evaluation report."
-version: 1.0.0
+description: "Audit Scout ideas with independent evidence and scoring."
+version: 1.1.0
 author: Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
 metadata:
   hermes:
-    tags: [idea-evaluator, idea-scout, business-ideas, evidence-audit, red-team, scoring, micro-saas, calibration]
+    tags: [idea-evaluator, idea-scout, business-ideas, evidence-audit, red-team, scoring, custom-apps, calibration]
     related_skills: [idea-scout, grounded-citations]
 ---
 
@@ -59,7 +59,9 @@ There are two business tracks:
 
 **Track A — Revenue Now**
 
-Templates, digital products, productized automations, niche directories, thin paid tools, or similar products capable of producing revenue relatively quickly.
+Templates, digital products, productized automations, niche directories, thin
+paid tools, custom applications, or similar products capable of producing
+revenue relatively quickly.
 
 **Track B — Audience Engine**
 
@@ -158,9 +160,43 @@ Unsupported conversion rates must never increase the demand score.
 
 ---
 
+## 6. Stay implementation-neutral
+
+Evaluate the business outcome first, then the implementation route. Do not
+reject custom code merely because no-code could produce a rough demo, and do
+not reward custom code merely because it appears more sophisticated or
+defensible.
+
+Compare the simplest credible routes on launch speed, capability, reliability,
+expected-volume cost, spike cost, security, maintainability, and operator
+burden. Prefer the route that delivers the promised outcome inside the
+operator boundary with the least total execution risk. A custom application is
+valid when it is necessary for the core value, materially improves economics,
+or creates the wedge; it still receives no exemption from evidence,
+distribution, 14-day launch, or solo-operability requirements.
+
+---
+
 # Evaluation pipeline
 
 Execute these stages in order for every Scout digest.
+
+## Stage 0 — Validate the batch shape
+
+The Scout may return 0–5 survivors; the rolling Track A:Track B mix is not a
+per-run quota. Never invent an idea, promote a killed candidate, or penalize an
+empty digest merely to make the evaluation report look complete.
+
+If the Scout returns zero survivors, inspect the run notes, source coverage, and
+kill ledger. Spot-check the most consequential kill reasons and report whether
+the empty result reflects disciplined filtering or inadequate research. Do not
+produce per-idea scores when no idea survived.
+
+A candidate with a load-bearing unknown has not cleared the gates. Treat it as a
+validation lead, not a survivor, until the missing evidence or technical behavior
+is verified.
+
+---
 
 ## Stage 1 — Ignore the Scout's scores
 
@@ -168,7 +204,12 @@ Read the ideas and evidence, but do not use the Scout's numerical scores when fo
 
 Score each idea independently first.
 
-Only after your independent evaluation is complete should you compare your score with the Scout's score.
+Only after your independent evaluation is complete should you compare it with
+the Scout's submitted position and six separate 1–5 dimensions: evidence
+strength, demand/payment proof, Track B share-loop strength when applicable,
+build speed, channel quality, and timing edge. The Scout deliberately has no
+composite score; do not invent one merely to compare it with the Evaluator's
+0–100 index.
 
 This prevents anchoring.
 
@@ -186,6 +227,13 @@ app? For a custom app, verify the framework, host, data store, and auth approach
 are named, and that maintenance and ops are accounted for — not merely "generate
 an app."
 
+Reconstruct the load-bearing execution path. For a custom application, map the
+frontend, server/runtime, data layer, authentication or explicit no-auth model,
+third-party services, deployment target, and failure handling. Verify critical
+capabilities against first-party documentation or a bounded technical spike;
+framework familiarity and generated code are not evidence that a difficult
+integration works.
+
 Look for hidden:
 
 - unmanaged custom code,
@@ -200,10 +248,15 @@ Look for hidden:
 - or debugging burden.
 
 "Lovable can generate it" does not by itself prove that the operator can maintain
-it, and neither does a generated custom app.
+it, and neither does generated custom code. Distinguish a demo-quality prototype
+from a launch-ready product with tests, safe configuration, deployment,
+observability, and a documented recovery path.
 
 ### G2 — Cost at scale
-Verify current pricing, limits, quotas, bandwidth, automation limits, storage, API usage, and overage behavior.
+Verify current pricing, limits, quotas, bandwidth, compute, serverless execution,
+database operations, storage, API usage, automation usage, and overage behavior.
+Check both realistic early volume and the Scout's 100,000-visit/24-hour stress
+case; neither substitutes for the other.
 
 ### G3 — Borrowed audience
 Verify the alleged distribution channel actually exists and is usable by an unknown operator.
@@ -228,16 +281,32 @@ Does the claimed residual asset genuinely have value?
 An empty email list, unranked SEO pages, an Etsy store with no reviews, or an unused Airtable database does not deserve much residual-value credit.
 
 ### G6 — Evidence
-Recheck evidence quality and independence. The Scout now reports a four-claim
-evidence bundle — pain, frequency, payment, solution-form — each tagged with
-persona, date, source/thread, and independence group. Audit each claim type
-separately; a Track A idea with no transaction-shaped payment evidence fails
-this gate.
+Recheck the Scout's four-claim evidence bundle. Every item must identify the
+target-buyer persona, date, source/thread URL, and independence group. Audit each
+claim separately:
+
+- **Pain proof:** at least three verbatim quotes from three independent people
+  in three independent threads or transactions across at least two platforms.
+  Multiple comments from one thread remain one independence group, and evidence
+  from an adjacent persona does not satisfy the gate.
+- **Frequency/urgency proof:** evidence that the problem recurs and matters now,
+  rather than a one-off annoyance.
+- **Payment proof for Track A:** at least one transaction-shaped signal—repeated
+  paid human work, verified sales of a close substitute, a paid pilot/preorder,
+  or explicit price acceptance from the target buyer.
+- **Solution-form proof:** evidence that the buyer pays for the proposed form of
+  solution, not merely an expensive incumbent or a broader outcome.
+
+Failure of any required claim type is a G6 failure, not a scoring weakness that
+can be averaged away.
 
 ### G7 — 14-day build
 Estimate the build independently.
 
 Assume the operator has no prior familiarity with niche-specific tooling.
+For custom applications, include architecture, implementation, integration,
+tests, responsive and cross-browser QA, security and abuse controls, deployment,
+monitoring, documentation, and launch materials—not only feature coding.
 
 ---
 
@@ -392,7 +461,9 @@ Distinguish between:
 
 **Pain proof** and **payment proof.**
 
-A Track A idea with strong pain but no credible payment evidence should be substantially downgraded.
+A Track A idea with strong pain but no transaction-shaped payment evidence
+fails G6 and cannot remain a Scout survivor. Evaluate it only as a validation
+lead and give it a KILL verdict unless new payment evidence is obtained.
 
 Price also matters.
 
@@ -467,19 +538,19 @@ These are three different claims.
 
 # Competition and wedge audit
 
-Search independently for:
+Repeat the Scout's lower-bound search in this order:
 
-- direct competitors,
-- free substitutes,
-- adjacent substitutes,
-- templates,
-- spreadsheets,
-- Reddit guides,
-- YouTube tutorials,
-- incumbent features,
-- marketplace products,
-- open-source tools,
-- and "good enough" manual workflows.
+1. incumbent free and entry tiers;
+2. specialist free products;
+3. marketplace templates;
+4. spreadsheets, guides, and tutorials;
+5. open-source tools;
+6. good-enough manual workflows;
+7. premium and direct competitors.
+
+Record the strongest substitute at the target buyer's actual scale. Do not let
+the Scout compare against a premium tier when a free tier already covers the
+persona's core job.
 
 Then ask:
 
@@ -516,15 +587,43 @@ Break the idea into:
 - analytics,
 - error handling,
 - deployment,
+- security and abuse controls,
+- testing and release checks,
+- monitoring and recovery,
+- dependency and upgrade maintenance,
 - and launch materials.
 
 Include learning time.
 
-A technically possible no-code build can still fail the 14-day gate because of debugging and product polish. A custom app carries the same risk plus deployment, hosting, and ops overhead — audit those explicitly rather than treating custom code as automatically disqualifying or automatically fine.
+A technically possible no-code build can still fail the 14-day gate because of
+debugging and product polish. A custom app carries implementation, deployment,
+hosting, security, dependency, and operations work, but may remove no-code
+workarounds and reduce variable cost. Audit the actual trade rather than treating
+custom code as automatically disqualifying or automatically superior.
+
+For any load-bearing custom application, report:
+
+- the minimum viable architecture;
+- the hardest technical unknown and how it was verified;
+- prototype time versus launch-ready time;
+- what must be tested before launch;
+- the managed services and their operational limits;
+- expected maintenance and incident burden;
+- whether no-code, custom code, or a hybrid is the lowest-risk route.
+
+A proposal fails build feasibility when a critical capability is merely assumed,
+the 14-day estimate omits production work, or the product requires ongoing
+self-managed infrastructure outside the operator boundary.
 
 ---
 
 # Economics audit
+
+Evaluate at realistic early volume, a plausible growth volume, and the Scout's
+100,000-visit/24-hour stress case. Include retries and failure paths. For custom
+applications, account for compute, serverless invocations, database operations,
+bandwidth, storage, observability, transactional email, third-party APIs, and
+managed-service thresholds.
 
 For Track A calculate:
 
@@ -586,6 +685,11 @@ Classify each dependency:
 
 A business with several HIGH dependencies should be downgraded even if current demand looks attractive.
 
+For custom applications, also inventory framework and package dependencies,
+open-source licenses, hosted-service limits, data portability, security update
+ownership, and single-provider failure modes. A managed deployment reduces ops
+work; it does not eliminate dependency or incident risk.
+
 ---
 
 # Adversarial test
@@ -637,6 +741,11 @@ Specify:
 Do not invent universal thresholds.
 
 Choose thresholds appropriate to the specific channel and idea and explain the reasoning.
+
+For a custom application with a load-bearing technical unknown, add a bounded
+technical spike with an explicit pass/fail result. Keep it separate from the
+market falsification test: proving that the software can be built does not prove
+that buyers want it.
 
 ---
 
@@ -691,9 +800,9 @@ Contains a fatal flaw, violates operator constraints, or lacks credible evidence
 
 Do not manipulate scores merely to ensure some ideas land in each category.
 
-All five ideas may be weak.
+Every submitted idea may be weak.
 
-All five may be strong.
+Every submitted idea may be strong.
 
 ---
 
@@ -713,7 +822,10 @@ If supposed demand is primarily multiple comments from the same discussion witho
 
 ### Track A without payment proof
 
-If the Scout has demonstrated frustration but found no credible evidence that customers pay for this outcome or a close substitute, Business-model Proof cannot receive a high score.
+If the Scout has demonstrated frustration but found no transaction-shaped
+evidence that target buyers pay for this outcome and form of solution, mark G6
+FAIL. The idea cannot be rescued by a Business-model Proof score or by strength
+in other dimensions.
 
 ### Unverified distribution
 
@@ -730,6 +842,14 @@ Absence of search results is not sufficient.
 Conversion percentages, revenue projections, traffic forecasts, or user-growth assumptions without evidence receive zero evidentiary credit.
 
 They may appear only as labeled scenarios.
+
+### Unverified custom-app path
+
+If a custom application depends on an undocumented integration, assumed API,
+unproven export/rendering behavior, unspecified auth or data flow, or an omitted
+deployment/maintenance path, Build Feasibility cannot receive a high score. A
+bounded technical spike may remove the cap when it directly verifies the
+load-bearing behavior.
 
 ---
 
@@ -753,9 +873,10 @@ After evaluating all ideas:
 
 1. Rank every idea from strongest to weakest.
 2. Rank by your own Success Likelihood Index, not the Scout's original position.
-3. Show the Scout's rank and score beside yours for comparison.
+3. Show the Scout's submitted position and six dimension scores beside your
+   evaluation; do not synthesize a Scout composite.
 4. Explain large disagreements.
-5. Do not force a recommendation simply because five ideas were submitted.
+5. Do not force a recommendation simply because ideas were submitted.
 6. State explicitly if none deserves a full build.
 7. Prefer the idea with stronger distribution and willingness-to-pay evidence when scores are close.
 8. Prefer a cheaper falsification test when two ideas otherwise look similar.
@@ -782,10 +903,15 @@ State whether the batch contains:
 - ideas worth validating,
 - or nothing worth pursuing.
 
+For a zero-survivor digest, stop the idea-ranking portion here. Add a concise
+**Empty-batch audit** covering source breadth, kill-reason quality, any questionable
+kills, and whether another Scout run is warranted; then provide Scout calibration
+notes. Do not manufacture rows or scores.
+
 ## Reranked ideas
 
-| New Rank | Scout Rank | Idea | Track | Evaluator Score | Confidence | Verdict |
-|---|---:|---|---|---:|---|---|
+| New Rank | Scout Position | Idea | Track | Scout Dimensions | Evaluator Score | Confidence | Verdict |
+|---|---:|---|---|---|---:|---|---|
 
 Follow with one sentence explaining the primary reason for each ranking.
 
@@ -793,7 +919,10 @@ Follow with one sentence explaining the primary reason for each ranking.
 
 # [IDEA NAME]
 
-**Scout rank:**
+**Scout submitted position:**
+
+**Scout dimension scores:** Evidence __/5; demand/payment __/5; share loop
+__/5 or N/A; build speed __/5; channel quality __/5; timing __/5.
 
 **Evaluator rank:**
 
@@ -856,7 +985,11 @@ Explain what customers would use instead and why they would switch.
 
 ## Build and operational reality
 
-Provide your independent build estimate and identify hidden complexity.
+Provide your independent prototype and launch-ready estimates, identify hidden
+complexity, and state whether no-code, custom code, or a hybrid is the
+lowest-risk route. For a custom application, summarize the minimum architecture,
+hardest unverified behavior, deployment model, security/abuse surface, tests,
+observability, and recurring maintenance burden.
 
 ## Economics
 
@@ -946,6 +1079,10 @@ Examples:
 - ignoring policy or copyright risk,
 - counting future audience as current distribution,
 - underestimating build complexity,
+- treating generated code as proof of launch readiness,
+- penalizing custom code without comparing it to no-code workarounds,
+- omitting deployment, security, testing, or maintenance from a custom-app estimate,
+- promoting a candidate with an unresolved load-bearing condition,
 - or allowing its own defense to neutralize a legitimate red-team finding.
 
 These notes exist to improve future Scout runs.
@@ -966,6 +1103,9 @@ For current information, verify rather than trust stale report claims, especiall
 - competitor availability,
 - community rules,
 - API availability,
+- framework and package capabilities,
+- managed-host and database limits,
+- open-source licensing and maintenance status,
 - platform policies,
 - referral programs,
 - and product features.
@@ -1037,7 +1177,7 @@ Do not quietly pivot it into something else and call it a survivor.
 Persist:
 
 - every idea evaluated,
-- Scout score and rank,
+- Scout submitted position and six separate dimension scores,
 - Evaluator score and rank,
 - key reason for disagreement,
 - fatal flaws discovered,
