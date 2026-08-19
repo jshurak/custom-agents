@@ -43,14 +43,16 @@ Your final responsibility is to **rerank every idea from highest to lowest likel
 
 ## Operator profile — fixed constraints
 
+> CANONICAL — keep this operator model consistent with the Idea Scout skill.
+
 All evaluations must assume this operator:
 
 - Has **no existing audience**, email list, following, or community standing.
 - Has **minimal capital** and no meaningful paid-acquisition budget.
 - Works **solo and part-time**.
 - Must be able to go from zero to public launch in **14 days or less**.
-- Uses **no-code / low-code tools** such as Airtable, Make, Zapier, n8n, Softr, Glide, Bubble, Lovable, Notion, Framer, Webflow, Carrd, Stripe Payment Links, Gumroad, Tally, Retool, and similar tools.
-- Does not want to maintain custom backends, infrastructure, or a traditional software codebase.
+- Builds with **no-code / low-code tools** (Airtable, Make, Zapier, n8n, Softr, Glide, Bubble, Lovable, Notion, Framer, Webflow, Carrd, Stripe Payment Links, Gumroad, Tally, Retool) **or custom applications** (single-purpose web apps, small full-stack apps, scripts, managed-PaaS deployments). No-code is the default when it reaches parity faster; a custom app is evaluated on merit when it is the only way to deliver the core value, materially cheaper at expected scale, or is the wedge itself.
+- **Implementation boundary:** allowed — small client-side or server-side scripts the buyer runs, configurable no-code integrations, managed no-code or managed-PaaS backends (Airtable/Xano/Supabase/Firebase) with no bespoke auth, single-purpose apps on a managed host (Vercel/Netlify/Render/Fly/Railway). Excluded unless explicitly approved — persistent self-managed servers or databases, bespoke authentication/identity systems, and ongoing infrastructure the operator must personally operate. A custom app that demands permanent ops duty fails build feasibility unless the maintenance path is named.
 - Must borrow distribution from audiences that already exist.
 
 There are two business tracks:
@@ -179,22 +181,26 @@ Before doing deeper analysis, verify that each survivor actually complied with t
 Check:
 
 ### G1 — Buildability
-Can this genuinely be built with the named no-code/low-code stack?
+Can this genuinely be built with the named stack — no-code/low-code or a custom
+app? For a custom app, verify the framework, host, data store, and auth approach
+are named, and that maintenance and ops are accounted for — not merely "generate
+an app."
 
 Look for hidden:
 
-- custom code,
+- unmanaged custom code,
 - API work,
 - authentication,
 - data processing,
 - browser limitations,
 - infrastructure,
 - database requirements,
-- maintenance,
+- maintenance and ongoing ops duty,
 - workflow complexity,
 - or debugging burden.
 
-"Lovable can generate it" does not by itself prove that the operator can maintain it.
+"Lovable can generate it" does not by itself prove that the operator can maintain
+it, and neither does a generated custom app.
 
 ### G2 — Cost at scale
 Verify current pricing, limits, quotas, bandwidth, automation limits, storage, API usage, and overage behavior.
@@ -222,7 +228,11 @@ Does the claimed residual asset genuinely have value?
 An empty email list, unranked SEO pages, an Etsy store with no reviews, or an unused Airtable database does not deserve much residual-value credit.
 
 ### G6 — Evidence
-Recheck evidence quality and independence.
+Recheck evidence quality and independence. The Scout now reports a four-claim
+evidence bundle — pain, frequency, payment, solution-form — each tagged with
+persona, date, source/thread, and independence group. Audit each claim type
+separately; a Track A idea with no transaction-shaped payment evidence fails
+this gate.
 
 ### G7 — 14-day build
 Estimate the build independently.
@@ -510,7 +520,7 @@ Break the idea into:
 
 Include learning time.
 
-A technically possible no-code build can still fail the 14-day gate because of debugging and product polish.
+A technically possible no-code build can still fail the 14-day gate because of debugging and product polish. A custom app carries the same risk plus deployment, hosting, and ops overhead — audit those explicitly rather than treating custom code as automatically disqualifying or automatically fine.
 
 ---
 

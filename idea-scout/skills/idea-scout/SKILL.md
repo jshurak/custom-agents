@@ -1,13 +1,13 @@
 ---
 name: idea-scout
-description: "Run the IDEA SCOUT methodology: mine verbatim demand signals, cluster, apply hard gates and red-teaming, and deliver evidenced, shippable no-code business ideas (3 Track A + 2 Track B per digest)."
-version: 1.0.0
+description: "Run the IDEA SCOUT methodology: mine verbatim demand signals, cluster, apply hard gates and red-teaming, and deliver evidenced, shippable business ideas (0–5 survivors per digest, targeting a rolling ~3:2 Track A:B mix)."
+version: 1.1.0
 author: Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
 metadata:
   hermes:
-    tags: [idea-scout, business-ideas, no-code, demand-research, red-team, micro-saas, evidence, anti-slop]
+    tags: [idea-scout, business-ideas, no-code, custom-apps, demand-research, red-team, micro-saas, evidence, anti-slop]
     related_skills: [grounded-citations, spike]
 ---
 
@@ -31,9 +31,24 @@ what you searched. An empty digest is a valid and respectable result.
 
 ## Operator profile (fixed constraints — never relax these)
 
-- **Build capability:** no-code/low-code tools such as Airtable, Make, Zapier, n8n,
+> CANONICAL — keep this operator model consistent with the Idea Evaluator skill.
+
+- **Build capability:** no-code/low-code tools (Airtable, Make, Zapier, n8n,
   Softr, Glide, Bubble, Lovable, Notion, Framer, Webflow, Carrd, Stripe
-  Payment Links, Gumroad, Tally, Retool. For infrastructure and custom codebase, user containers and cloud native structures.
+  Payment Links, Gumroad, Tally, Retool) **and custom applications** — single-purpose
+  web apps, small full-stack apps, scripts, or managed-PaaS deployments. No-code is
+  the default when it reaches parity faster; a custom app is evaluated on merit when
+  it is the only way to deliver the core value, materially cheaper at expected scale,
+  or is the wedge itself. A custom-app idea must still clear the same gates.
+- **Implementation boundary:**
+  - Allowed: small client-side or server-side scripts the buyer runs; configurable
+    no-code integrations (Make/Zapier/n8n); managed no-code or managed-PaaS backends
+    (Airtable/Xano/Supabase/Firebase) with no bespoke auth; single-purpose apps on a
+    managed host (Vercel/Netlify/Render/Fly/Railway).
+  - Excluded unless explicitly approved: persistent self-managed servers or databases,
+    bespoke authentication/identity systems, and ongoing infrastructure the operator
+    must personally operate. A custom app that demands permanent ops duty is a G1/G7
+    fail unless the maintenance path is named.
 - **Audience:** zero. No list, no following, no community standing. Every idea
   must borrow an existing audience.
 - **Time budget:** 14 days solo, part-time, from zero to live and public.
@@ -60,9 +75,15 @@ fast kills, not for one perfect idea.
 3. **Check timing.** Flag anything newly possible in the last 90 days — new
    API, platform policy change, new public dataset, price drop, marketplace
    category launch. Timing edge is a scoring bonus, not a gate.
-4. **Check prior art.** Assume it already exists; prove otherwise. Search
-   Product Hunt, the relevant marketplace, Chrome Web Store, app stores, plain
-   web search. Output is either KILL or a stated differentiated wedge.
+4. **Check prior art.** Assume it already exists; prove otherwise. Before
+   claiming any wedge, check the lower bound in this order and record what you
+   found at each rung: (1) incumbent free and entry tiers, (2) specialist free
+   products, (3) marketplace templates, (4) spreadsheets / guides / tutorials,
+   (5) open-source tools, (6) good-enough manual workflows, (7) premium
+   competitors. Then answer in one sentence: "Why would this exact buyer switch
+   from the best free or already-owned substitute?" If you cannot name that
+   substitute and the switch reason, the idea dies here. Output is KILL or a
+   stated differentiated wedge that survives the substitute check.
 5. **Gate.** Apply all hard gates. Most candidates die here. This is correct.
 6. **Red-team.** Switch roles. For each survivor, write the strongest case for
    why it fails. Attack distribution and cost-at-scale first — those kill more
@@ -72,9 +93,12 @@ fast kills, not for one perfect idea.
 
 ## Hard gates (all must pass — no partial credit, no averaging)
 
-- **G1 — Named stack.** You can specify the exact no-code tools and how they
-  connect. "Build it with AI" is not a stack. Failure to name it means you
-  haven't proven shippability.
+- **G1 — Named stack.** You can specify the exact tools and how they connect —
+  no-code tools, a managed-PaaS custom stack, or a named framework + host + data
+  layer. "Build it with AI" is not a stack. A custom-app stack must also name its
+  deploy host, data store, and auth approach, and justify why custom beats the
+  no-code route for this specific job. Failure to name it means you haven't
+  proven shippability.
 - **G2 — Survives its own success.** Compute running cost at 100,000 visits in
   24 hours. Per-call model or API costs with no rate limit or caching layer is
   a kill unless you specify the mitigation. A viral hit that produces a bill or
@@ -86,10 +110,25 @@ fast kills, not for one perfect idea.
   vertical video. If it needs explaining, it cannot be distributed cold.
 - **G5 — Residual asset.** If it flops, something remains: captured emails,
   indexed SEO pages, or a relationship in a community.
-- **G6 — Evidence attached.** At least three verbatim quotes with live URLs
-  from at least two different sources.
+- **G6 — Evidence attached.** A candidate does not clear this gate on pain
+  alone. Attach an evidence bundle with four separate claim types, each tagged
+  with persona, date, source/thread URL, and independence group:
+  - **Pain proof** — at least three verbatim quotes from at least two platforms,
+    from three independent people in three independent threads or transactions
+    (five comments in one thread = one independence group). Evidence must come
+    from the proposed buyer's persona, not an adjacent one.
+  - **Frequency / urgency proof** — why the problem recurs and why they want it
+    solved now.
+  - **Payment proof (required for Track A)** — at least one transaction-shaped
+    signal: repeated paid human work for the task, verified sales of a close
+    substitute, a paid pilot or preorder, or explicit price acceptance from the
+    target buyer. A Track A candidate without payment proof fails G6.
+  - **Solution-form proof** — evidence the buyer pays for this form of solution
+    (template / automation / directory / app), not merely that they are unhappy
+    with an incumbent.
 - **G7 — 14-day build.** Honest estimate in days, assuming part-time solo work
-  and no prior familiarity with the specific tools.
+  and no prior familiarity with the specific tools. Custom-app builds must
+  include deployment and setup time, not just feature code.
 
 Automatic kills regardless of appeal: two-sided marketplaces, cold-start data
 dependencies, hardware, regulated categories (health claims, financial advice,
@@ -102,7 +141,8 @@ Score each 1–5. **Report every dimension separately. Never collapse into a
 single composite score** — an average lets a fatally weak dimension hide.
 
 - Evidence strength — count, recency, and emotional intensity of complaints
-- Demand proof — is anyone already paying for a worse version?
+- Demand proof / payment evidence — is anyone already paying for a worse
+  version? (Track A must show transaction-shaped evidence; see G6.)
 - Share loop strength (Track B) — is the output artifact worth posting?
 - Build speed — days to public
 - Channel quality — how accessible is the borrowed audience to an unknown?
@@ -126,7 +166,7 @@ unknown.
 **Tier 3 — Stated pain.** Reddit niche subs, Hacker News (Ask HN threads and
 Show HN comments — the comments beat the launches), Stack Exchange, G2 and
 Capterra 2–3 star reviews of expensive SaaS, app store reviews. Filter hard by
-"solvable with a thin no-code tool."
+"solvable with a thin no-code tool or a small custom app."
 
 **Tier 4 — Prior art and timing.** Product Hunt comments, Indie Hackers,
 Acquire.com and Flippa listings, API and platform changelogs.
@@ -144,10 +184,14 @@ it. When uncertain whether a source is real, drop it.
 
 ## Output
 
-Every digest: **five ideas, three Track A and two Track B.**
+Each digest: **0–5 survivors.** Ship only ideas that cleared every gate — never
+promote a marginal candidate to fill a quota. The 3 Track A : 2 Track B mix is a
+rolling multi-run target, not a per-run requirement; self-correct the ratio in
+memory over time. A run that produces nothing is valid: say so and report what
+was searched.
 
 - **Track A — revenue now:** templates, productized automations, niche
-  directories, thin paid micro-tools. Money in weeks, no virality required.
+  directories, thin paid micro-tools or apps. Money in weeks, no virality required.
 - **Track B — audience engine:** free tool with a shareable result artifact and
   an email gate on the output.
 
@@ -156,20 +200,21 @@ Each idea, in this exact structure:
 TITLE
 Track: A or B
 One-line pitch:
-The problem (verbatim quotes, 3+, each with URL and source):
+The problem (verbatim quotes, 3+, each with URL, source, persona, and date):
 Who has it (specific, not a demographic):
-Named stack (exact tools and connections):
+Evidence bundle (pain / frequency / payment / solution-form, each with source):
+Strongest free or already-owned substitute (and why this buyer switches from it):
+Named stack (exact tools and connections — or framework + host + data + auth):
 Build estimate (days):
 Distribution placement (the exact subreddit / category / query / community):
 First post or listing (write the actual copy):
 Share artifact (Track B — what exactly does the user post?):
 Monetization path and price point:
 Cost at 100k visits / 24h (show the arithmetic):
-Prior art found and the wedge:
+Prior art found and the wedge (after the lower-bound substitute check):
 Strongest case it fails (from red-team):
 Residual asset if it flops:
 Scores (six dimensions, listed separately):
-
 
 Close each digest with **Run notes**: sources searched, candidates generated,
 candidates killed and the gate that killed them, and anything newly possible
