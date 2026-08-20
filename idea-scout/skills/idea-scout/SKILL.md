@@ -1,7 +1,7 @@
 ---
 name: idea-scout
 description: "Run the IDEA SCOUT methodology: mine verbatim demand signals, cluster, apply hard gates and red-teaming, and deliver evidenced, shippable business ideas (0–5 survivors per digest, targeting a rolling ~3:2 Track A:B mix)."
-version: 1.2.0
+version: 1.3.0
 author: Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
@@ -85,15 +85,19 @@ fast kills, not for one perfect idea.
    substitute and the switch reason, the idea dies here. Output is KILL or a
    stated differentiated wedge that survives the substitute check.
 5. **Gate.** Apply all hard gates. Most candidates die here. This is correct.
-6. **Red-team.** Switch roles. For each survivor, write the strongest case for
+6. **Promotion audit.** Before any candidate is called a survivor, run the
+   per-candidate promotion audit below. This is where the gates get enforced,
+   not merely recited — a candidate that slips past its own evidence here never
+   reaches survivor status.
+7. **Red-team.** Switch roles. For each survivor, write the strongest case for
    why it fails. Attack distribution and cost-at-scale first — those kill more
    indie launches than product quality does. Ideas that don't survive their own
    critique are dropped, not softened.
-7. **Define the falsification test.** For each survivor, specify a cheap
+8. **Define the falsification test.** For each survivor, specify a cheap
    concierge or pre-build test (see G8) that can produce a real signal — a
    submission, price acceptance, payment, artifact usage, or repeat use — in
    hours or a few days.
-8. **Score and package.** Only survivors get scored and written up, each tagged
+9. **Score and package.** Only survivors get scored and written up, each tagged
    with a promotion tier (see "Promotion tiers").
 
 ## Hard gates (all must pass — no partial credit, no averaging)
@@ -142,6 +146,13 @@ fast kills, not for one perfect idea.
   - **Solution-form proof** — evidence the buyer pays for this form of solution
     (template / automation / directory / app), not merely that they are unhappy
     with an incumbent.
+  - **Enforcement at packaging time.** A required claim that is only *indirect,
+    unverified, or contradicted* fails this gate. In particular, payment proof
+    that is really spend on a broader incumbent, an autocomplete suggestion,
+    marketplace emptiness, or a complaint is not transaction-shaped evidence:
+    spend on an incumbent proves demand for the incumbent's load-bearing job, and
+    is not payment proof for a product that omits that job. A candidate that does
+    not clear G6 is excluded from survivors — never defended into the digest.
 - **G7 — 14-day build.** Honest estimate in days, assuming part-time solo work
   and no prior familiarity with the specific tools. Custom-app builds must
   include deployment and setup time, not just feature code.
@@ -157,6 +168,44 @@ dependencies, hardware, regulated categories (health claims, financial advice,
 legal advice), anything needing a sales call, anything requiring content
 moderation at launch.
 
+## Promotion audit (per candidate, before survivor status)
+
+The hard gates are claims; this audit is the check that they were actually
+applied. No candidate reaches survivor status, or a promotion tier, without
+passing every row below for its track. Run it explicitly for every candidate
+that survived the gates, and record the result in the run notes.
+
+**Every Track A survivor** names, in a compact G6 audit, all four of:
+
+- the **exact transaction-shaped signal** — who paid, for what, and where it is
+  recorded;
+- the **target-buyer persona** the evidence actually comes from;
+- the **paid outcome** — the specific job the buyer paid for; and
+- the **paid solution form** — template / automation / directory / app.
+
+If any one of those four cannot be named specifically, the candidate fails G6
+and is not defended into the digest. Spend on a broader incumbent is **not**
+payment proof when the proposed product omits the paid incumbent's load-bearing
+function (paying for CCC/Xtime or McLeod proves demand for *their* job, not for
+a template kit that leaves it out). Autocomplete suggestions, marketplace
+emptiness, and complaints are demand hints, never transaction-shaped evidence.
+A required claim marked *indirect, unverified, or contradicted* excludes the
+candidate from survivors; retain it only as a validation lead or a kill-ledger
+entry, and say which.
+
+**Every Track B survivor:**
+
+- distinguishes **private delivery** (handing a document to an adjuster, broker,
+  or CPA) from **voluntary public sharing** (posting the artifact where others
+  can discover it); and
+- names the **observed or directly evidenced** public sharing behavior the loop
+  depends on. A loop built on private hand-off is not a share loop.
+
+**Every survivor, either track,** verifies its load-bearing chain **end to end**
+— input, calculation, render/export, gate, delivery — on the named stack.
+Feature adjacency (the stack *can* do something similar) is not a spike; the
+exact artifact-generation path must actually run.
+
 ## Scoring (survivors only)
 
 Score each 1–5. **Report every dimension separately. Never collapse into a
@@ -166,7 +215,8 @@ single composite score** — an average lets a fatally weak dimension hide.
   (pain proof only — payment proof and solution-form proof stay separate; see G6)
 - Demand proof / payment evidence — is anyone already paying for a worse
   version? (Track A must show transaction-shaped evidence; see G6.)
-- Share loop strength (Track B) — is the output artifact worth posting?
+- Share loop strength (Track B) — is the output artifact worth posting, and is
+  there observed public sharing (not just private hand-off) driving the loop?
 - Build speed — days to public
 - Channel quality — existence, operator access, and plausible conversion to
   first customers (see G3), not mere presence
@@ -247,12 +297,14 @@ One-line pitch:
 The problem (verbatim quotes, 3+, each with URL, source, persona, and date):
 Who has it (specific, not a demographic):
 Evidence bundle (pain / frequency / payment / solution-form, each with source):
+G6 audit (Track A — exact transaction-shaped signal, buyer persona, paid outcome, paid solution form):
 Strongest free or already-owned substitute (and why this buyer switches from it):
 Named stack (exact tools and connections — or framework + host + data + auth):
 Build estimate (days):
 Distribution placement (exact channel, how an unknown operator reaches it, path to first 10 customers):
 First post or listing (write the actual copy):
 Share artifact (Track B — what exactly does the user post?):
+Share-loop evidence (Track B — the observed public sharing behavior, not private hand-off):
 Monetization path and price point:
 Cost at 100k visits / 24h (show the arithmetic):
 Prior art found and the wedge (after the lower-bound substitute check):
@@ -263,7 +315,11 @@ Scores (six dimensions, listed separately):
 
 Close each digest with **Run notes**: sources searched, candidates generated,
 candidates killed and the gate that killed them, and anything newly possible
-you noticed but couldn't yet turn into an idea.
+you noticed but couldn't yet turn into an idea. Include a **gate-enforcement
+self-check** reporting how many candidates were demoted specifically by
+(a) payment-form mismatch, (b) share-loop mismatch, and (c) unverified
+implementation — so a future run can see the gates were applied, not merely
+stated.
 
 ## Memory
 
