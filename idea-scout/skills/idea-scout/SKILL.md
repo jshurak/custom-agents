@@ -1,7 +1,7 @@
 ---
 name: idea-scout
 description: "Run the IDEA SCOUT methodology: mine verbatim demand signals, cluster, apply hard gates and red-teaming, and deliver evidenced, shippable business ideas (0–5 survivors per digest, targeting a rolling ~3:2 Track A:B mix)."
-version: 1.3.0
+version: 1.4.0
 author: Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
@@ -87,8 +87,11 @@ fast kills, not for one perfect idea.
 5. **Gate.** Apply all hard gates. Most candidates die here. This is correct.
 6. **Promotion audit.** Before any candidate is called a survivor, run the
    per-candidate promotion audit below. This is where the gates get enforced,
-   not merely recited — a candidate that slips past its own evidence here never
-   reaches survivor status.
+   not merely recited — every required claim is given an explicit status, and a
+   candidate with any failed required claim never reaches survivor status.
+   After the audits, **recompute the survivor list from the audited statuses**:
+   any candidate carrying a non-PASS required claim is demoted, and the digest
+   only lists candidates with a clean audit.
 7. **Red-team.** Switch roles. For each survivor, write the strongest case for
    why it fails. Attack distribution and cost-at-scale first — those kill more
    indie launches than product quality does. Ideas that don't survive their own
@@ -151,8 +154,12 @@ fast kills, not for one perfect idea.
     that is really spend on a broader incumbent, an autocomplete suggestion,
     marketplace emptiness, or a complaint is not transaction-shaped evidence:
     spend on an incumbent proves demand for the incumbent's load-bearing job, and
-    is not payment proof for a product that omits that job. A candidate that does
-    not clear G6 is excluded from survivors — never defended into the digest.
+    is not payment proof for a product that omits that job. The same test applies
+    to the **solution-form claim**: citing spend on an integrated incumbent (an
+    FSM, estimating, or reporting app) is an *indirect* solution-form signal
+    unless the proposed product delivers that incumbent's load-bearing paid
+    function. A candidate that does not clear G6 is excluded from survivors —
+    never defended into the digest.
 - **G7 — 14-day build.** Honest estimate in days, assuming part-time solo work
   and no prior familiarity with the specific tools. Custom-app builds must
   include deployment and setup time, not just feature code.
@@ -171,11 +178,32 @@ moderation at launch.
 ## Promotion audit (per candidate, before survivor status)
 
 The hard gates are claims; this audit is the check that they were actually
-applied. No candidate reaches survivor status, or a promotion tier, without
-passing every row below for its track. Run it explicitly for every candidate
-that survived the gates, and record the result in the run notes.
+applied — and it is **disposition-controlling**. Run it explicitly for every
+candidate that survived the gates, record each required claim with an explicit
+status, and record the result in the run notes. A candidate with any failed
+required claim is demoted *by the audit itself*; it does not reach survivor
+status, a promotion tier, or the final digest, no matter how the narrative
+reads. Defenses such as "self-owned layer," "supply gap," or a sibling free
+generator do **not** override a failed required claim unless new, independent,
+transaction-shaped evidence is supplied.
 
-**Every Track A survivor** names, in a compact G6 audit, all four of:
+Every required claim is given exactly one status:
+
+- **PASS** — direct, verified evidence from the target-buyer persona.
+- **INDIRECT** — evidence is real but proves demand for a *broader* paid job
+  than the one the proposed product delivers (e.g. spend on integrated
+  software whose load-bearing paid function the product omits).
+- **UNVERIFIED** — the claim rests on an unrun or unconfirmable check (e.g. an
+  output chain that was described but never spiked end to end).
+- **CONTRADICTED** — the evidence points the other way.
+- **MISSING** — no evidence supplied for a required claim.
+
+Only **PASS** satisfies a required claim. INDIRECT, UNVERIFIED, CONTRADICTED,
+and MISSING are all disqualifying for the claim they are attached to.
+
+**Every Track A candidate** records a status for each of its four required G6
+claims — **pain**, **frequency/urgency**, **transaction-shaped payment proof**,
+and **solution-form proof** — and, for the payment claim, all four of:
 
 - the **exact transaction-shaped signal** — who paid, for what, and where it is
   recorded;
@@ -183,28 +211,56 @@ that survived the gates, and record the result in the run notes.
 - the **paid outcome** — the specific job the buyer paid for; and
 - the **paid solution form** — template / automation / directory / app.
 
-If any one of those four cannot be named specifically, the candidate fails G6
-and is not defended into the digest. Spend on a broader incumbent is **not**
-payment proof when the proposed product omits the paid incumbent's load-bearing
-function (paying for CCC/Xtime or McLeod proves demand for *their* job, not for
-a template kit that leaves it out). Autocomplete suggestions, marketplace
-emptiness, and complaints are demand hints, never transaction-shaped evidence.
-A required claim marked *indirect, unverified, or contradicted* excludes the
-candidate from survivors; retain it only as a validation lead or a kill-ledger
-entry, and say which.
+If any one of those four cannot be named specifically, the payment claim is not
+PASS and the candidate fails G6. The rules that make this audit actually bite:
 
-**Every Track B survivor:**
+- Spend on a **broader incumbent is INDIRECT**, not payment proof, when the
+  proposed product omits the paid incumbent's load-bearing function (paying for
+  CCC/Xtime or McLeod proves demand for *their* job, not for a template kit that
+  leaves it out). This applies to the **solution-form claim as well as the
+  payment claim**: citing spend on an integrated FSM/estimating/reporting app as
+  proof that buyers pay for a one-time document kit that omits the app's
+  scheduling, auto-submission, or device-history function is an INDIRECT
+  solution-form claim and cannot pass G6.
+- **Reframing a non-equivalent product as a "self-owned layer"** (a kit that
+  omits the carrier-mandated estimating or submission function) does not rescue
+  a failed payment or solution-form claim. To survive, that layer needs its own
+  separate transaction-shaped evidence — proof buyers pay for *the layer itself*
+  — or the candidate is demoted.
+- Autocomplete suggestions, marketplace emptiness, and complaints are demand
+  hints, never transaction-shaped evidence. A claim marked INDIRECT,
+  UNVERIFIED, or CONTRADICTED excludes the candidate from survivors; retain the
+  candidate only as a validation lead or a kill-ledger entry, and say which.
 
-- distinguishes **private delivery** (handing a document to an adjuster, broker,
-  or CPA) from **voluntary public sharing** (posting the artifact where others
-  can discover it); and
-- names the **observed or directly evidenced** public sharing behavior the loop
-  depends on. A loop built on private hand-off is not a share loop.
+**Every Track B candidate:**
 
-**Every survivor, either track,** verifies its load-bearing chain **end to end**
-— input, calculation, render/export, gate, delivery — on the named stack.
-Feature adjacency (the stack *can* do something similar) is not a spike; the
-exact artifact-generation path must actually run.
+- names the **observed or directly evidenced** voluntary public-sharing behavior
+  the loop depends on — a real instance of a buyer posting the artifact where
+  strangers can discover it; and
+- classifies **customer, carrier, accountant, or authority delivery** as
+  **private hand-off**, which receives **no share-loop credit**. Handing a
+  document to a customer, adjuster, broker, CPA, carrier, or regulator is
+  completing a transaction, not public sharing. A loop built on private
+  hand-off is not a share loop and fails.
+
+**Every candidate, either track,** verifies its load-bearing chain **end to end**
+on the named stack with an actual **working-spike result** for each step —
+**render/export**, **calculations**, **uploaded-file treatment**, **gate**, and
+**delivery**. Feature adjacency (the stack *can* do something similar) is not a
+spike; the exact artifact-generation path must actually run, and each step must
+carry the result of running it. A missing or failed step result is an
+UNVERIFIED implementation claim and demotes the candidate.
+
+**Recompute survivors after the audits.** The survivor list is the output of
+these statuses, not of the narrative. Re-derive it: any candidate with any
+non-PASS required claim is dropped from the digest. A candidate that failed a
+required gate cannot retain "Worth validating" status; it is demoted to a
+validation lead or a kill-ledger entry.
+
+The canonical repo carries regression fixtures under
+`idea-scout/skills/idea-scout/regression/`; the 2026-08-20 fixture re-runs five
+candidates that failed these exact rules and asserts zero survivors. Re-check
+each new candidate against the fixture's failure patterns before finalizing.
 
 ## Scoring (survivors only)
 
@@ -298,6 +354,8 @@ The problem (verbatim quotes, 3+, each with URL, source, persona, and date):
 Who has it (specific, not a demographic):
 Evidence bundle (pain / frequency / payment / solution-form, each with source):
 G6 audit (Track A — exact transaction-shaped signal, buyer persona, paid outcome, paid solution form):
+Promotion audit statuses (pain / frequency / payment / solution-form — each PASS / INDIRECT / UNVERIFIED / CONTRADICTED / MISSING):
+Implementation spike (render/export / calculations / uploaded-file treatment / gate / delivery — each with the run result):
 Strongest free or already-owned substitute (and why this buyer switches from it):
 Named stack (exact tools and connections — or framework + host + data + auth):
 Build estimate (days):
@@ -316,10 +374,16 @@ Scores (six dimensions, listed separately):
 Close each digest with **Run notes**: sources searched, candidates generated,
 candidates killed and the gate that killed them, and anything newly possible
 you noticed but couldn't yet turn into an idea. Include a **gate-enforcement
-self-check** reporting how many candidates were demoted specifically by
-(a) payment-form mismatch, (b) share-loop mismatch, and (c) unverified
-implementation — so a future run can see the gates were applied, not merely
-stated.
+self-check** that counts mismatches **from the audited candidate statuses**, not
+from narrative judgment: list each candidate's per-claim statuses and the failed
+required claim (if any) that demoted it. Report how many candidates were demoted
+by (a) payment-form mismatch, (b) solution-form mismatch, (c) share-loop
+mismatch, and (d) unverified implementation — and **reconcile the totals to the
+survivor/kill ledger**: demoted + survived must equal candidates generated, and
+every demotion must name the failed gate. A self-check whose totals do not
+reconcile, or that reports zero mismatches while a survivor's own audit table
+shows non-PASS required claims, is a failed run — recompute the survivor list
+before shipping.
 
 ## Memory
 
