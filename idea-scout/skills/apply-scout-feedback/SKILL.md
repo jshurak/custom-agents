@@ -1,7 +1,7 @@
 ---
 name: apply-scout-feedback
 description: "Ingest open idea-scout-feedback issues, judge which changes to accept, apply them to the Idea Scout skill, and ship via branch → pull request → merge → issue closure."
-version: 0.1.0
+version: 0.2.0
 author: Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
@@ -82,8 +82,11 @@ Extract, for each issue:
 - the acceptance criteria (checkable conditions);
 - the concrete examples that motivated it.
 
-Separate facts, inferences, and proposed policy. Note anything you plan to
-reject or scope down, and why.
+Separate facts, inferences, and proposed policy. For each requested change in
+the issue, record the action you will take — **accepted**, **scoped down**, or
+**rejected** — and a one-line rationale. This "feedback → action" ledger is what
+the pull request body must surface (see step 7), so the reviewer sees a verdict
+on every suggestion, not just the ones you acted on.
 
 ### 3. Map changes to the skill
 
@@ -119,17 +122,52 @@ git push -u origin feat/apply-scout-feedback-<issue-number>
 
 ### 7. Open, merge, and close
 
+Write the PR body to a temp file with `write_file`, then create the PR with
+`--body-file`. The body must contain a **Feedback → action** table that lists
+every requested change from the issue and the action you took on it:
+
+```markdown
+Closes #<number>
+
+## Feedback → action
+
+| # | Feedback (as suggested in the issue) | Action | What changed / why |
+|---|---|---|---|
+| 1 | <verbatim or close paraphrase of the suggestion> | Accepted | <what the skill now does> |
+| 2 | <...> | Scoped down | <what was applied, and what was deliberately left out> |
+| 3 | <...> | Rejected | <reason> |
+
+## Acceptance criteria
+
+- [x] / [ ] one line per criterion in the issue — satisfied, or rejected with reason
+
+## Other changes
+
+- <version bump, new/moved skills, pointer edits, anything not tied to a single item>
+```
+
+Rules:
+
+- List **every** requested change from the issue — accepted, scoped down, and
+  rejected alike. Never silently drop a suggestion.
+- Quote or closely paraphrase the original suggestion so a reviewer can match
+  each row to the issue without reopening it.
+- If the issue has no enumerated "requested changes", use its section headings
+  (e.g. "Promotion guidance", "Acceptance criteria") as the rows.
+
+Then:
+
 ```text
 gh pr create --base main --head feat/apply-scout-feedback-<number> \
   --title "feat(idea-scout): apply feedback from #<number>" \
-  --body "Closes #<number>"
+  --body-file <body-file>
 gh pr merge --squash --delete-branch
 gh issue close <number> --comment "Applied in #<pr-number>. <one-line summary>"
 ```
 
-The PR body lists what changed and what was rejected. If the merge auto-closes
-the issue (because the body says "Closes #<number>"), skip the explicit close —
-but always verify the issue is actually closed before reporting success.
+If the merge auto-closes the issue (because the body says "Closes #<number>"),
+skip the explicit close — but always verify the issue is actually closed before
+reporting success.
 
 ### 8. Sync the profile and report
 
@@ -159,6 +197,6 @@ what was rejected (if anything), and the final issue state.
 - [ ] Skill `version` bumped.
 - [ ] Every acceptance criterion satisfied or explicitly rejected.
 - [ ] Branch cut from clean `main`; one issue per PR.
-- [ ] PR body links the issue; commit is conventional.
+- [ ] PR body links the issue and lists every requested change with the action taken (Feedback → action table).
 - [ ] PR merged; issue closed on the remote (verified).
 - [ ] Profile sync ran; report lists issue, PR, changes, and rejections.
