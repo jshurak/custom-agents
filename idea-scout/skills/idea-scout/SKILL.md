@@ -1,7 +1,7 @@
 ---
 name: idea-scout
 description: "Run the IDEA SCOUT methodology: mine verbatim demand signals, cluster, apply hard gates and red-teaming, and deliver evidenced, shippable business ideas (0–5 survivors per digest, targeting a rolling ~3:2 Track A:B mix)."
-version: 1.4.0
+version: 1.5.0
 author: Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
@@ -250,6 +250,28 @@ on the named stack with an actual **working-spike result** for each step —
 spike; the exact artifact-generation path must actually run, and each step must
 carry the result of running it. A missing or failed step result is an
 UNVERIFIED implementation claim and demotes the candidate.
+
+**A spike that only proves a file was emitted is not a passing implementation
+claim.** Each load-bearing spike must name the exact product claim it verifies
+(not just the script it ran) and test that claim's **semantic invariant or
+real-world compatibility**, not merely that an artifact generated:
+
+- Calculator / spreadsheet spikes carry at least one **independently
+  hand-computed test case** or a **domain invariant** that confirms the metric
+  definitions and edge cases are correct — e.g. NOI must be pre-financing
+  (debt service excluded), a fee labeled *revenue* must not also be subtracted
+  as a cost, and a percentage-of-revenue cost must round consistently.
+- Generated-document / artifact spikes confirm the **required fields,
+  calculations, uploads, and delivery actually appear in the final artifact** —
+  a rendered file is checked for the promised content, not merely for existing.
+- Compatibility claims (e.g. "email-client-safe", "renders in Outlook",
+  "HIPAA-compliant form") name the **actual client / environment matrix
+  tested**; an untested environment is reported as untested, never as PASS.
+
+A spike that verifies creation but not correctness is labeled
+**PARTIAL/UNVERIFIED** and cannot, by itself, clear a load-bearing build gate
+(G1/G7). The exact claim, the test, and the test result are recorded in the
+candidate's implementation-spike section.
 
 **Recompute survivors after the audits.** The survivor list is the output of
 these statuses, not of the narrative. Re-derive it: any candidate with any
