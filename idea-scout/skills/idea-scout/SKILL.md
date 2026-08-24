@@ -1,7 +1,7 @@
 ---
 name: idea-scout
 description: "Run the IDEA SCOUT methodology: mine verbatim demand signals, cluster, apply hard gates and red-teaming, and deliver evidenced, shippable business ideas (0–5 survivors per digest, targeting a rolling ~3:2 Track A:B mix)."
-version: 1.5.0
+version: 1.6.0
 author: Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
@@ -146,6 +146,22 @@ fast kills, not for one perfect idea.
     form, not merely in category), a paid pilot or preorder, or explicit
     acceptance of a real price. A Track A candidate without transaction-shaped
     payment proof fails G6, no exceptions.
+  - **Marketplace attribution (listing-bound).** Every marketplace payment
+    signal used to satisfy G6 must be represented as a listing-bound evidence
+    record capturing, at minimum: `canonical_url`, `seller`, `listing_title`,
+    `paid_outcome`, `solution_form`, `transaction_indicator` (the orders or
+    purchase-gated reviews attributable to that listing), and `retrieval_date`.
+    A count shown in an ad, a recommendation, a related-gig shelf, a seller-wide
+    profile, or a search-result card must **not** be attributed to the focal
+    listing unless the marketplace explicitly identifies it as that listing's
+    transactions. An offer with no attributable completed order or
+    purchase-gated review is classified as **supply**, not transaction evidence.
+    The opened listing's actual delivered outcome must match the candidate's
+    load-bearing workflow; an adjacent outcome (e.g. a deal-analysis sheet cited
+    as proof for a rent-ledger) is marked **INDIRECT**. A dead, redirected, or
+    parked product URL is **CONTRADICTED** and supplies no current payment
+    credit. A Track A candidate whose only payment signals are INDIRECT or
+    CONTRADICTED fails G6.
   - **Solution-form proof** — evidence the buyer pays for this form of solution
     (template / automation / directory / app), not merely that they are unhappy
     with an incumbent.
@@ -231,6 +247,13 @@ PASS and the candidate fails G6. The rules that make this audit actually bite:
   hints, never transaction-shaped evidence. A claim marked INDIRECT,
   UNVERIFIED, or CONTRADICTED excludes the candidate from survivors; retain the
   candidate only as a validation lead or a kill-ledger entry, and say which.
+- Marketplace transaction counts must be **listing-bound**: a review/order count
+  from a related-gig shelf, a seller-wide profile, a search-result card, or an
+  ad cannot be attached to the focal listing. Each marketplace signal used for
+  G6 payment proof carries its own `canonical_url` + `seller` + `listing_title`
+  + `paid_outcome` + `solution_form` + `transaction_indicator` + `retrieval_date`,
+  and the opened page's actual outcome must match the candidate's workflow or it
+  is INDIRECT/CONTRADICTED.
 
 **Every Track B candidate:**
 
