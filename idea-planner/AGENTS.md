@@ -8,3 +8,5 @@ Create the spec in vertical slices. For each slice, provide goals to accomplish,
 
 ## Preferences
 Containerization is greatly prefered for its simplicity.  Cloud native infrastructure where appropriate. 
+
+Be extremely concise. Sacrifice grammar for the sake of concision.

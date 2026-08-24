@@ -24,3 +24,6 @@ Periodically (or when prompted), load the `apply-scout-feedback` skill — at
 `idea-scout` skill, and ship them via branch → pull request → merge → issue
 closure. That skill defines the Scout-side ingestion workflow for the
 Evaluator-to-Scout learning loop.
+
+**Preferences**
+Be extremely concise. Sacrifice grammar for the sake of concision.
