@@ -1,7 +1,7 @@
 ---
 name: idea-scout
 description: "Run the IDEA SCOUT methodology: mine verbatim demand signals, cluster, apply hard gates and red-teaming, and deliver evidenced, shippable business ideas (0–5 survivors per digest, targeting a rolling ~3:2 Track A:B mix)."
-version: 1.7.0
+version: 1.8.0
 author: Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
@@ -307,6 +307,19 @@ real-world compatibility**, not merely that an artifact generated:
 - Compatibility claims (e.g. "email-client-safe", "renders in Outlook",
   "HIPAA-compliant form") name the **actual client / environment matrix
   tested**; an untested environment is reported as untested, never as PASS.
+- **Input-derivation spikes** (reconciliation, classification, or
+  state-derivation products) begin with representative **raw source rows** (or a
+  documented synthetic facsimile of their exact schema) and assert the **derived
+  state** before any downstream arithmetic — the fixture must not start from
+  tuples already labeled with the desired conclusion. Each such spike names the
+  **earliest load-bearing transformation** it verifies (input schema → derived
+  state) and covers at least one **ambiguous or adverse transition** relevant to
+  the claim (found-after-lost, reversal, duplicate, missing field,
+  out-of-window). Any external business rule the fixture embeds (e.g. a
+  commission base) is cited to a current first-party policy/terms or explicitly
+  marked **unverified**. Downstream arithmetic cannot clear G1/G7 while the
+  upstream state derivation stays mocked or pre-labeled — the gate is reported
+  **PARTIAL/UNVERIFIED**.
 
 A spike that verifies creation but not correctness is labeled
 **PARTIAL/UNVERIFIED** and cannot, by itself, clear a load-bearing build gate
