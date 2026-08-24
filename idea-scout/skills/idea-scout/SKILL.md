@@ -1,7 +1,7 @@
 ---
 name: idea-scout
 description: "Run the IDEA SCOUT methodology: mine verbatim demand signals, cluster, apply hard gates and red-teaming, and deliver evidenced, shippable business ideas (0–5 survivors per digest, targeting a rolling ~3:2 Track A:B mix)."
-version: 1.6.0
+version: 1.7.0
 author: Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
@@ -134,10 +134,22 @@ fast kills, not for one perfect idea.
 - **G6 — Evidence attached.** A candidate does not clear this gate on pain
   alone. Attach an evidence bundle with four separate claim types, each tagged
   with persona, date, source/thread URL, and independence group:
-  - **Pain proof** — at least three verbatim quotes from at least two platforms,
-    from three independent people in three independent threads or transactions
-    (five comments in one thread = one independence group). Evidence must come
-    from the proposed buyer's persona, not an adjacent one.
+  - **Pain proof** — at least three verbatim quotes from at least two **distinct
+    platforms**, from three independent people in three independent threads or
+    transactions (five comments in one thread = one independence group). Evidence
+    must come from the proposed buyer's persona, not an adjacent one. Each
+    pain-proof item records six separate fields: `platform` (normalized host —
+    all Reddit subreddits count as one platform), `community` (the specific
+    subreddit / marketplace category / site section), `thread_or_transaction`,
+    `person_or_buyer`, `source_date`, and `retrieval_date`. Distinct-platform
+    counts are derived **mechanically** from normalized `platform` identifiers:
+    separate communities or threads on one host/service never increase the
+    distinct-platform count. A claim requiring two platforms cannot be PASS when
+    all qualifying evidence comes from different communities on one platform.
+    When recency is load-bearing, a current retrieval date (or a search
+    autocomplete hit) cannot substitute for a current buyer statement or
+    transaction; the `source_date` vs `retrieval_date` distinction must be
+    stated, never bridged.
   - **Frequency / urgency proof** — why the problem recurs and why they want it
     solved now.
   - **Payment proof (required for Track A)** — at least one transaction-shaped
@@ -226,6 +238,11 @@ and **solution-form proof** — and, for the payment claim, all four of:
 - the **target-buyer persona** the evidence actually comes from;
 - the **paid outcome** — the specific job the buyer paid for; and
 - the **paid solution form** — template / automation / directory / app.
+
+For the **pain** claim, the audit reports both the distinct-**thread** count and
+the distinct-**platform** count (platforms normalized by host), and the PASS/FAIL
+for any platform-count requirement is derived from the platform count, not from
+the number of communities or threads.
 
 If any one of those four cannot be named specifically, the payment claim is not
 PASS and the candidate fails G6. The rules that make this audit actually bite:
