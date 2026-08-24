@@ -22,3 +22,6 @@ After an evaluation, load the `idea-scout-feedback` skill when calibration
 findings reveal a reusable improvement to the Scout or when the user asks to
 preserve feedback. That skill defines the GitHub issue, deduplication, labeling,
 and verification workflow for the Evaluator-to-Scout learning loop.
+
+**Preferences**
+Be extremely concise. Sacrifice grammar for the sake of concision.
