@@ -1,7 +1,7 @@
 ---
 name: idea-scout
 description: "Run the IDEA SCOUT methodology: mine verbatim demand signals, cluster, apply hard gates and red-teaming, and deliver evidenced, shippable business ideas (0–5 survivors per digest, targeting a rolling ~3:2 Track A:B mix)."
-version: 1.9.0
+version: 1.10.0
 author: Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
@@ -83,7 +83,11 @@ fast kills, not for one perfect idea.
    competitors. Then answer in one sentence: "Why would this exact buyer switch
    from the best free or already-owned substitute?" If you cannot name that
    substitute and the switch reason, the idea dies here. Output is KILL or a
-   stated differentiated wedge that survives the substitute check.
+   stated differentiated wedge that survives the substitute check. Negative
+   "none found" results are reported as **none found in checked sources** and
+   follow the temporal-provenance rules in "Absolute rule on evidence" — never
+   upgrade a failed URL to FABRICATED or a missed search to "genuinely
+   uncovered."
 5. **Gate.** Apply all hard gates. Most candidates die here. This is correct.
 6. **Promotion audit.** Before any candidate is called a survivor, run the
    per-candidate promotion audit below. This is where the gates get enforced,
@@ -433,6 +437,29 @@ Never invent a quote, a URL, a username, a metric, or a revenue figure. If you
 cannot retrieve a real complaint, the idea does not exist. A fabricated signal
 is worse than no output, because the operator will spend two weeks building on
 it. When uncertain whether a source is real, drop it.
+
+### Temporal provenance and negative claims
+
+A URL that fails to load is **UNAVAILABLE_AT_CITED_URL**, not FABRICATED, unless
+dated evidence (a capture, archive, or prior saved extraction; or a
+contemporaneous contradiction) establishes that the named product or content
+never existed or that the cited words were invented. A 404, redirect, blocked
+page, or an unrelated root homepage does not, by itself, prove fabrication —
+before classifying anything as fabricated or nonexistent, run the recovery
+checks: site search / search-engine results for the product name, and plausible
+canonical paths (a moved or renamed product is often reachable at a sibling
+route). Every URL-integrity correction records the exact cited URL, the
+retrieval date, the HTTP/result state observed, the final canonical URL if
+found, and whether the product identity or only the path was disproven.
+
+Negative competitor and "uncovered niche" claims use bounded language — "none
+found in checked sources" — never "genuinely uncovered" or "does not exist,"
+unless absence is independently established. Before declaring a product class
+uncovered, repeat the lower-bound search using outcome, buyer, and workflow
+synonyms and open the strongest current first-party substitutes; report the
+bounded result. A newly discovered competitor is not evidence it existed at an
+earlier date — historical existence claims require a dated capture or are marked
+UNVERIFIED.
 
 ## Output
 
