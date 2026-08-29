@@ -1,7 +1,7 @@
 ---
 name: idea-scout
 description: "Run the IDEA SCOUT methodology: mine verbatim demand signals, cluster, apply hard gates and red-teaming, and deliver evidenced, shippable business ideas (0–5 survivors per digest, targeting a rolling ~3:2 Track A:B mix)."
-version: 1.8.0
+version: 1.9.0
 author: Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
@@ -174,6 +174,31 @@ fast kills, not for one perfect idea.
     parked product URL is **CONTRADICTED** and supplies no current payment
     credit. A Track A candidate whose only payment signals are INDIRECT or
     CONTRADICTED fails G6.
+  - **Payment-record form classification.** Every marketplace payment signal is
+    classified by what the buyer actually paid for, into exactly one of:
+    `performed_service` (a human did the task for them), `customized_setup` (a
+    human built or configured a bespoke deliverable), or `off_the_shelf_product`
+    (a ready-made template/tool/app delivered as-is). These classes are never
+    summed or described as one "exact-form" total. `performed_service` and
+    `customized_setup` prove willingness to pay for a *human outcome*, not for a
+    self-serve product; only `off_the_shelf_product` — or a paid pilot / preorder
+    for the candidate's own form — is transaction-shaped proof for a self-serve
+    product, and even that must still pass the solution-form check. A "178 exact
+    orders" style total that mixes a performed costing service, an
+    order-count-less template listing, and a customized done-for-you setup is a
+    payment-form mismatch and fails G6.
+  - **Acquisition-market reconciliation.** Before claiming a marketplace "gap" or
+    "clean supply gap," open the acquisition marketplace the first-customer plan
+    actually depends on — not merely a delivery marketplace such as Gumroad — and
+    record the strongest directly competing listing: its current price, product
+    form, load-bearing features, and listing-bound transaction indicator.
+    Delivery and acquisition marketplaces are named separately; absence on one
+    does not establish a gap on the other. Free specialist templates or tools are
+    compared feature-by-feature against the proposed wedge, never dismissed as
+    "scratch spreadsheets" or "just a template." A direct acquisition-market
+    competitor or feature-equivalent free substitute that contradicts the wedge
+    forces recomputation of G3, G6 solution-form status, the wedge, the price
+    rationale, and the survivor disposition before the digest is finalized.
   - **Solution-form proof** — evidence the buyer pays for this form of solution
     (template / automation / directory / app), not merely that they are unhappy
     with an incumbent.
@@ -268,9 +293,13 @@ PASS and the candidate fails G6. The rules that make this audit actually bite:
   from a related-gig shelf, a seller-wide profile, a search-result card, or an
   ad cannot be attached to the focal listing. Each marketplace signal used for
   G6 payment proof carries its own `canonical_url` + `seller` + `listing_title`
-  + `paid_outcome` + `solution_form` + `transaction_indicator` + `retrieval_date`,
-  and the opened page's actual outcome must match the candidate's workflow or it
-  is INDIRECT/CONTRADICTED.
+  + `paid_outcome` + `solution_form` + `transaction_indicator` + `retrieval_date`
+  + a `payment_record_form` tag (`performed_service` / `customized_setup` /
+  `off_the_shelf_product`), and the opened page's actual outcome must match the
+  candidate's workflow or it is INDIRECT/CONTRADICTED. Payment-record classes
+  are never aggregated into one "exact-form" total, and the acquisition
+  marketplace named in the first-customer plan must be opened directly (not the
+  delivery marketplace) before any "gap" claim survives the audit.
 
 **Every Track B candidate:**
 
