@@ -1,7 +1,7 @@
 ---
 name: idea-scout
 description: "Run the IDEA SCOUT methodology: mine verbatim demand signals, cluster, apply hard gates and red-teaming, and deliver evidenced, shippable business ideas (0–5 survivors per digest, targeting a rolling ~3:2 Track A:B mix)."
-version: 1.10.0
+version: 1.11.0
 author: Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
@@ -74,7 +74,10 @@ fast kills, not for one perfect idea.
    loud person is not.
 3. **Check timing.** Flag anything newly possible in the last 90 days — new
    API, platform policy change, new public dataset, price drop, marketplace
-   category launch. Timing edge is a scoring bonus, not a gate.
+   category launch. Timing edge is a scoring bonus, not a gate. A platform
+   fee/pricing/policy event used as a timing edge must first pass the named
+   platform-trigger reconciliation record (see "Absolute rule on evidence" —
+   a third-party tracker cannot mark a platform fact VERIFIED).
 4. **Check prior art.** Assume it already exists; prove otherwise. Before
    claiming any wedge, check the lower bound in this order and record what you
    found at each rung: (1) incumbent free and entry tiers, (2) specialist free
@@ -460,6 +463,33 @@ synonyms and open the strongest current first-party substitutes; report the
 bounded result. A newly discovered competitor is not evidence it existed at an
 earlier date — historical existence claims require a dated capture or are marked
 UNVERIFIED.
+
+### Named platform-trigger reconciliation
+
+A named platform fee, pricing, policy, or feature event (the "timing edge" of
+pipeline step 3) is usable as a trigger only after a compact
+source-reconciliation record is produced, and never on the strength of a
+third-party tracker, affiliate page, news article, or search snippet alone.
+Third-party trackers may surface events and name competitors; they cannot
+verify a platform fact.
+
+Before an event earns timing credit, record at minimum: exact platform,
+market/region, affected plan or product, old value, new value, announcement
+date, effective date, retrieval date, and the canonical URL of the strongest
+current first-party governing source (pricing, policy, or developer page) plus,
+when available, the platform's dated changelog or policy-update page. Only a
+platform-owned page marks a rate/policy fact **VERIFIED**.
+
+When current first-party sources disagree, mark the event **CONFLICTED** and
+report the exact disagreement; the event receives no timing credit until the
+sources reconcile. Region- or plan-specific facts are not generalized beyond
+their documented scope. Substitute and ecosystem claims distinguish
+**availability / claimed scope** (a tool exists and claims current rates) from
+**exercised runtime accuracy** (the tool was run against a first-party fixture
+and produced correct output): a tracker hub that exists is not evidence that it
+auto-emits a correct tool for every future event, and a sample of sites or
+events does not establish "every event" or a "structurally closed" market. Use
+bounded language naming the sampled sites and events.
 
 ## Output
 
